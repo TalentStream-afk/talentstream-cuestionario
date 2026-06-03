@@ -1,5 +1,6 @@
 import streamlit as st
 from supabase import create_client
+import os
 
 # Configuración de pantalla limpia, ideal para celulares
 st.set_page_config(page_title="Evaluación Conductual - TalentStream", page_icon="🧠", layout="centered")
@@ -14,8 +15,8 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Conexión a tu Supabase (utiliza tus mismos secretos)
-SUPABASE_URL = st.secrets["SUPABASE_URL"]
-SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # 1. Leer los datos ocultos que viajan en el link (?cedula=XXX&tipo=YYY)
